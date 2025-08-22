@@ -338,10 +338,14 @@
       const tbody=el('tbody');
 
       let data = await loadDay(weekIdx,dayIdx); // array ou []
-      if (!data.length){
-        container.append(el('div',{className:'empty',textContent:'Sem dados no Firestore para este dia.'}));
-        return;
-      }
+        if (!data.length){
+            // Dados padrão para iniciar, se o Firestore estiver vazio
+          data = [
+            {nome: '', sets: 0, reps: 0, carga: 0},
+            {nome: '', sets: 0, reps: 0, carga: 0},
+            {nome: '', sets: 0, reps: 0, carga: 0}
+                ];
+                        }
 
       data.forEach((o)=>{
         const tr=el('tr');
@@ -496,3 +500,4 @@
   </script>
 </body>
 </html>
+
